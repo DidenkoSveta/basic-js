@@ -18,6 +18,24 @@ function createDreamTeam(/* members */) {
   // remove line with error and write your code here
 }
 
+function createDreamTeam(members) {
+  let arr=[];
+  if (!Array.isArray(members)) {
+    return false;
+  }
+  for(let i=0; i<members.length; i++){
+    if(typeof(members[i])==='string'){
+      arr.push((members[i][0]).toUpperCase());
+    }
+  }
+  if(arr.length<1){
+    return false
+  }
+  sortarr=arr.sort();
+  return sortarr.join('');
+
+}
+
 module.exports = {
   createDreamTeam
 };
