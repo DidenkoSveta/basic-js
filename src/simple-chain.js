@@ -6,13 +6,16 @@ const { NotImplementedError } = require('../extensions/index.js');
  */
 const chainMaker = {
   chain: [],
+
   getLength() {
     return this.chain.length;
   },
+
   addLink(value) {
     this.chain.push(`( ${value} )`);
     return this;
   },
+
   removeLink(position) {
     if (
       typeof position != "number" ||
@@ -31,9 +34,9 @@ const chainMaker = {
     return this;
   },
   finishChain() {
-    let res = this.chain.join("~~");
+    let result = this.chain.join("~~");
     this.chain = [];
-    return res;
+    return result;
   },
 };
 

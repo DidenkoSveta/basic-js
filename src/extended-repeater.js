@@ -15,39 +15,50 @@ const { NotImplementedError } = require('../extensions/index.js');
  * => 'STRINGPLUS00PLUS00PLUS**STRINGPLUS00PLUS00PLUS**STRINGPLUS00PLUS00PLUS'
  *
  */
-function repeater(str, options) {
-  
-  let repeatTimes = options.repeatTimes || 1;
-  
-  let separator = options.separator || "+";
-  
-  let addition =
-    String(options.addition) == "undefined" ? "" : String(options.addition);
-  
-  let additionRepeatTimes = options.additionRepeatTimes || 1;
-  
-  let additionSeparator = options.additionSeparator || "|";
-  
-  let res = addition;
-  
-  for ( let i = 1; i < additionRepeatTimes; i++) {
-    res += additionSeparator + addition;
-    
-  let oneStr = str + res;
-    
-  let result = str + res;
-    
-  for ( let i = 1; i < repeatTimes; i++) {
-    result += separator + oneStr;
-  }
-    
-  return result;
-    
-}
+ function repeater(str, options) {
 
-module.exports = {
-  repeater,
-};
+  let { repeatTimes, separator, addition, additionRepeatTimes, additionSeparator } = options;
+
+  let strToUpdate = str;
+
+  let defaultadditionRepeatTimes = additionRepeatTimes || 1;
+
+  let defaultrepeatTimes = repeatTimes || 1;
+
+  let initialSeparator = separator || "+";
+
+  let initialadditionSeparator = additionSeparator || "|";
+
+  if (addition !== undefined) {
+    addition = String(addition)
+
+  } else {
+    addition = "";
+  }
+
+  let finalAddition = "";
+
+  let finalStrToUpdate = "";
+
+  if (addition) {
+
+    for (let i = 0; i < defaultadditionRepeatTimes - 1; i++) {
+      finalAddition += addition + initialadditionSeparator;
+    }
+
+    finalAddition += addition;
+  };
+
+  strToUpdate += finalAddition;
+
+    for (let i = 0; i < defaultrepeatTimes - 1; i++) {
+      finalStrToUpdate += strToUpdate + initialSeparator;
+    }
+
+    finalStrToUpdate += strToUpdate;
+    
+  return finalStrToUpdate;
+}
 
 module.exports = {
   repeater
